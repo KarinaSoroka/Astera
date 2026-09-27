@@ -28,24 +28,25 @@
 
         <p>Enter your birth details below.</p>
 
-        <form>
+        <form id="birthChartForm">
 
             <label for="name">Your name:</label><br>
-            <input type="text" id="name" name="name"><br><br>
+            <input type="text" id="name" name="name" required><br><br>
 
             <label for="birthdate">Date of birth:</label><br>
-            <input type="date" id="birthdate" name="birthdate"><br><br>
+            <input type="date" id="birthdate" name="birthdate" required><br><br>
 
             <label for="birthtime">Time of birth:</label><br>
             <input type="time" id="birthtime" name="birthtime"><br><br>
 
             <label for="birthplace">Place of birth:</label><br>
-            <input type="text" id="birthplace" name="birthplace"><br><br>
+            <input type="text" id="birthplace" name="birthplace" required><br><br>
 
             <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br><br>
+            <input type="email" id="email" name="email" required><br><br>
 
             <input type="submit" value="Create Birth Chart">
+            <p id="zodiac-result"></p>
 
         </form>
 
@@ -56,6 +57,8 @@
 <footer>
     <p>Astera</p>
 </footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
