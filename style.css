@@ -102,3 +102,10 @@ a:focus {
     padding: 30px;
     border-radius: 12px;
 }
+.show-result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(235, 225, 245, 0.9);
+    border-radius: 10px;
+    font-weight: bold;
+}

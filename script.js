@@ -1,17 +1,8 @@
-alert("JavaScript is working");
-
 const form = document.getElementById("birthChartForm");
 const birthdate = document.getElementById("birthdate");
 const result = document.getElementById("zodiac-result");
 
-form.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-    const date = new Date(birthdate.value + "T00:00:00");
-
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
+function getZodiacSign(day, month){
 
     let zodiacSign = "";
 
@@ -41,5 +32,20 @@ form.addEventListener("submit", function(event) {
         zodiacSign = "Pisces";
     }
 
+    return zodiacSign;
+}
+form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const date = new Date(birthdate.value + "T00:00:00");
+
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+
+    const zodiacSign = getZodiacSign(day, month);
+
     result.textContent = "Your zodiac sign is " + zodiacSign + ".";
+
+    result.classList.add("show-result");
 });
