@@ -76,3 +76,16 @@ form.addEventListener("submit", function(event) {
     result.classList.add("show-result");
      getHoroscope(zodiacSign);
 });
+// jQuery click() and slideToggle() methods based on
+// W3Schools jQuery Effects (2026)
+// https://www.w3schools.com/jquery/jquery_hide_show.asp
+
+$(document).ready(function() {
+
+    $("#birth-chart-info-btn").click(function() {
+
+        $("#birth-chart-info").slideToggle();
+
+    });
+
+});

@@ -28,6 +28,24 @@
 
         <p>Enter your birth details below.</p>
 
+        <!-- jQuery will show and hide this information -->
+        <button type="button" id="birth-chart-info-btn">
+            What is a Birth (Natal) Chart?
+        </button>
+
+        <div id="birth-chart-info" style="display: none;">
+
+            <p>
+                A birth chart, also called a natal chart, is based on the
+                date, time and place of birth. It shows the positions of
+                the planets at the time a person was born.
+            </p>
+
+        </div>
+
+        <br>
+
+
         <form id="birthChartForm">
 
             <label for="name">Your name:</label><br>
@@ -64,6 +82,9 @@
 <footer>
     <p>Astera</p>
 </footer>
+
+<!-- jQuery library used following W3Schools jQuery Tutorial (2026) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script src="script.js"></script>
 
