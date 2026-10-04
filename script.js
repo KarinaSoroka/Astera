@@ -2,6 +2,9 @@ const form = document.getElementById("birthChartForm");
 const birthdate = document.getElementById("birthdate");
 const result = document.getElementById("zodiac-result");
 
+const horoscopeResult = document.getElementById("horoscope-result");
+const apiCredit = document.getElementById("api-credit");
+
 function getZodiacSign(day, month){
 
     let zodiacSign = "";
@@ -34,6 +37,29 @@ function getZodiacSign(day, month){
 
     return zodiacSign;
 }
+
+async function getHoroscope(zodiacSign) {
+
+    try {
+
+        const response = await fetch(
+            "https://sigastra.com/api/v1/daily?lang=en&sign=" +
+            zodiacSign.toLowerCase()
+        );
+
+        const data = await response.json();
+
+        horoscopeResult.textContent = data.items[0].text;
+
+        apiCredit.textContent = data.attribution.text;
+        apiCredit.href = data.attribution.localizedHref;
+
+    } catch (error) {
+
+        horoscopeResult.textContent =
+            "Sorry, the horoscope could not be loaded.";
+    }
+}
 form.addEventListener("submit", function(event) {
 
     event.preventDefault();
@@ -45,7 +71,8 @@ form.addEventListener("submit", function(event) {
 
     const zodiacSign = getZodiacSign(day, month);
 
-    result.textContent = "Your zodiac sign is " + zodiacSign + ".";
+        result.textContent = "Your zodiac sign is " + zodiacSign + ".";
 
     result.classList.add("show-result");
+     getHoroscope(zodiacSign);
 });
