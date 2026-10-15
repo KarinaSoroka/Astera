@@ -61,10 +61,6 @@ async function getHoroscope(zodiacSign, period) {
 
     horoscopeResult.textContent = "Loading your horoscope...";
 
-    // Clear previous attribution before loading a new horoscope
-    apiCredit.textContent = "";
-    apiCredit.removeAttribute("href");
-
     try {
 
         const response = await fetch(
@@ -72,45 +68,23 @@ async function getHoroscope(zodiacSign, period) {
             "?lang=en&sign=" + zodiacSign.toLowerCase()
         );
 
-        // Display the API error details to help identify the problem
-if (!response.ok) {
-
-    const errorDetails = await response.text();
-
-    console.error("API status:", response.status);
-    console.error("API response:", errorDetails);
-
-    throw new Error("API request failed: " + response.status);
-}
+        if (!response.ok) {
+            throw new Error("API request failed");
+        }
 
         const data = await response.json();
 
-        // Check that the API has returned horoscope information
-        // Error handling based on W3Schools JavaScript Error Statements (2026)
-        // https://www.w3schools.com/js/js_errors.asp
-
-        if (!data.items || !data.items[0] || !data.items[0].text) {
-            throw new Error("No horoscope data available");
-        }
-
         horoscopeResult.textContent = data.items[0].text;
 
-        // Display the API source when attribution is available
-        if (data.attribution) {
-            apiCredit.textContent = data.attribution.text;
-            apiCredit.href = data.attribution.localizedHref;
-        }
+        apiCredit.textContent = data.attribution.text;
+        apiCredit.href = data.attribution.localizedHref;
 
     } catch (error) {
 
-        console.error("Horoscope error:", error);
-
         horoscopeResult.textContent =
-            "Sorry, your horoscope is temporarily unavailable. Please try again later.";
-
+            "Sorry, the horoscope could not be loaded.";
     }
 }
-
 
 birthChartForm.addEventListener("submit", function(event) {
 
