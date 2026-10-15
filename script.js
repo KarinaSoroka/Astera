@@ -63,9 +63,12 @@ async function getHoroscope(zodiacSign, period) {
 
     try {
 
+        // API integration based on Free Horoscope API documentation
+        // https://freehoroscopeapi.com/
+
         const response = await fetch(
-            "https://sigastra.com/api/v1/" + period +
-            "?lang=en&sign=" + zodiacSign.toLowerCase()
+            "https://freehoroscopeapi.com/api/v1/get-horoscope/" +
+            period + "?sign=" + zodiacSign.toLowerCase()
         );
 
         if (!response.ok) {
@@ -74,17 +77,26 @@ async function getHoroscope(zodiacSign, period) {
 
         const data = await response.json();
 
-        horoscopeResult.textContent = data.items[0].text;
+        // Check that the API returned horoscope information
+        if (!data.data || !data.data.horoscope) {
+            throw new Error("No horoscope data available");
+        }
 
-        apiCredit.textContent = data.attribution.text;
-        apiCredit.href = data.attribution.localizedHref;
+        horoscopeResult.textContent = data.data.horoscope;
+
+        apiCredit.textContent = "Horoscope provided by Free Horoscope API";
+        apiCredit.href = "https://freehoroscopeapi.com/";
 
     } catch (error) {
 
+        console.error("Horoscope error:", error);
+
         horoscopeResult.textContent =
-            "Sorry, the horoscope could not be loaded.";
+            "Sorry, your horoscope is temporarily unavailable. Please try again later.";
+
     }
 }
+
 
 birthChartForm.addEventListener("submit", function(event) {
 
