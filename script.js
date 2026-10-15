@@ -61,31 +61,29 @@ async function getHoroscope(zodiacSign, period) {
 
     horoscopeResult.textContent = "Loading your horoscope...";
 
+    apiCredit.textContent = "";
+    apiCredit.removeAttribute("href");
+
     try {
 
-        // API integration based on Free Horoscope API documentation
-        // https://freehoroscopeapi.com/
+        // API request based on Sigastra documentation
+        // https://sigastra.com/partners/api
 
         const response = await fetch(
-            "https://freehoroscopeapi.com/api/v1/get-horoscope/" +
-            period + "?sign=" + zodiacSign.toLowerCase()
+            "https://sigastra.com/api/v1/" + period +
+            "?lang=en&sign=" + zodiacSign.toLowerCase()
         );
 
         if (!response.ok) {
-            throw new Error("API request failed");
+            throw new Error("API request failed: " + response.status);
         }
 
         const data = await response.json();
 
-        // Check that the API returned horoscope information
-        if (!data.data || !data.data.horoscope) {
-            throw new Error("No horoscope data available");
-        }
+        horoscopeResult.textContent = data.items[0].text;
 
-        horoscopeResult.textContent = data.data.horoscope;
-
-        apiCredit.textContent = "Horoscope provided by Free Horoscope API";
-        apiCredit.href = "https://freehoroscopeapi.com/";
+        apiCredit.textContent = data.attribution.text;
+        apiCredit.href = data.attribution.localizedHref;
 
     } catch (error) {
 
