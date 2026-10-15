@@ -4,11 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birth Chart - Astera</title>
+    <title>Astera Reading - Astera</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+<!-- Skip link allows keyboard users to bypass the navigation.
+     Based on W3C WAI WCAG Technique G1:
+     https://www.w3.org/WAI/WCAG21/Techniques/general/G1.html -->
+
+<a class="skip-link" href="#main-content">
+    Skip to main content
+</a>
 
 <header>
     <h1>Astera</h1>
@@ -16,7 +24,7 @@
     <nav>
         <a href="index.html">Home</a>
         <a href="zodiac.html">Zodiac Signs</a>
-        <a href="birth-chart.html">Birth Chart</a>
+        <a href="birth-chart.html">Astera Reading</a>
         <a href="about.html">About</a>
     </nav>
 </header>
@@ -24,9 +32,18 @@
 <main id="main-content">
 
     <section class="birth-chart-form">
-        <h2>Create Your Birth Chart</h2>
 
-        <p>Enter your birth details below.</p>
+        <h2>Get Your Astera Reading</h2>
+
+        <p>
+            Enter your birth details to discover your zodiac sign
+            and receive your daily, weekly or monthly horoscope.
+        </p>
+
+        <p>
+            A full personalised natal chart will be available
+            in a future version of Astera.
+        </p>
 
         <!-- jQuery will show and hide this information -->
         <button type="button" id="birth-chart-info-btn">
@@ -45,7 +62,6 @@
 
         <br>
 
-
         <form id="birthChartForm">
 
             <label for="name">Your name:</label><br>
@@ -54,26 +70,61 @@
             <label for="birthdate">Date of birth:</label><br>
             <input type="date" id="birthdate" name="birthdate" required><br><br>
 
-            <label for="birthtime">Time of birth:</label><br>
+            <label for="birthtime">Time of birth (optional):</label><br>
             <input type="time" id="birthtime" name="birthtime"><br><br>
 
-            <label for="birthplace">Place of birth:</label><br>
-            <input type="text" id="birthplace" name="birthplace" required><br><br>
+            <label for="birthplace">Place of birth (optional):</label><br>
+            <input type="text" id="birthplace" name="birthplace"><br><br>
 
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
+            <label for="horoscope-period">Horoscope period:</label><br>
+            <select id="horoscope-period" name="horoscope-period">
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select><br><br>
 
-            <input type="submit" value="Create Birth Chart">
-            <p id="zodiac-result"></p>
-            
-            <h3>Today's Horoscope</h3>
+            <label for="email">Email (optional):</label><br>
+            <input type="email" id="email" name="email"><br>
 
-<p id="horoscope-result"></p>
+            <p class="form-note">
+                Your birth time, birthplace and email are not currently
+                used or stored. These features will be introduced in
+                future versions of Astera.
+            </p>
 
-<a id="api-credit" href="" target="_blank"></a>
-            
+            <input type="submit" value="Get My Astera Reading">
 
         </form>
+
+        <!-- Results are hidden until the form is submitted -->
+
+        <div id="reading-result" class="reading-result" hidden>
+
+            <h2>Your Astera Reading</h2>
+
+            <p id="zodiac-result"></p>
+
+            <h3 id="horoscope-heading">Horoscope</h3>
+
+            <!-- Allows screen readers to announce updated horoscope text.
+                 Based on W3C WAI-ARIA 1.2:
+                 https://www.w3.org/TR/wai-aria-1.2/#aria-live -->
+
+            <p id="horoscope-result" aria-live="polite"></p>
+
+            <a id="api-credit"
+               target="_blank"
+               rel="noopener noreferrer"></a>
+
+        </div>
+    <!-- API attribution required by Sigastra.
+     Source: https://sigastra.com/partners/api -->
+
+<p>
+    Horoscope information provided by
+    <a href="https://sigastra.com/"
+       target="_blank"
+       rel="noopener noreferrer">Sigastra</a>.
 
     </section>
 

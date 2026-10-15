@@ -1,9 +1,27 @@
-const form = document.getElementById("birthChartForm");
+const birthChartForm = document.getElementById("birthChartForm");
 const birthdate = document.getElementById("birthdate");
-const result = document.getElementById("zodiac-result");
-
+const zodiacResult = document.getElementById("zodiac-result");
 const horoscopeResult = document.getElementById("horoscope-result");
 const apiCredit = document.getElementById("api-credit");
+const horoscopePeriod = document.getElementById("horoscope-period");
+const horoscopeHeading = document.getElementById("horoscope-heading");
+const readingResult = document.getElementById("reading-result");
+
+
+// Prevent users from selecting a future birth date
+// Based on W3Schools JavaScript Date Get Methods and Input Date max Property (2026)
+// https://www.w3schools.com/js/js_date_methods.asp
+// https://www.w3schools.com/jsref/prop_date_max.asp
+
+const today = new Date();
+
+const maximumDate =
+    today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+
+birthdate.max = maximumDate;
+
 
 function getZodiacSign(day, month){
 
@@ -38,29 +56,63 @@ function getZodiacSign(day, month){
     return zodiacSign;
 }
 
-async function getHoroscope(zodiacSign) {
+
+async function getHoroscope(zodiacSign, period) {
+
+    horoscopeResult.textContent = "Loading your horoscope...";
+
+    // Clear previous attribution before loading a new horoscope
+    apiCredit.textContent = "";
+    apiCredit.removeAttribute("href");
 
     try {
 
         const response = await fetch(
-            "https://sigastra.com/api/v1/daily?lang=en&sign=" +
-            zodiacSign.toLowerCase()
+            "https://sigastra.com/api/v1/" + period +
+            "?lang=en&sign=" + zodiacSign.toLowerCase()
         );
+
+        // Display the API error details to help identify the problem
+if (!response.ok) {
+
+    const errorDetails = await response.text();
+
+    console.error("API status:", response.status);
+    console.error("API response:", errorDetails);
+
+    throw new Error("API request failed: " + response.status);
+}
 
         const data = await response.json();
 
+        // Check that the API has returned horoscope information
+        // Error handling based on W3Schools JavaScript Error Statements (2026)
+        // https://www.w3schools.com/js/js_errors.asp
+
+        if (!data.items || !data.items[0] || !data.items[0].text) {
+            throw new Error("No horoscope data available");
+        }
+
         horoscopeResult.textContent = data.items[0].text;
 
-        apiCredit.textContent = data.attribution.text;
-        apiCredit.href = data.attribution.localizedHref;
+        // Display the API source when attribution is available
+        if (data.attribution) {
+            apiCredit.textContent = data.attribution.text;
+            apiCredit.href = data.attribution.localizedHref;
+        }
 
     } catch (error) {
 
+        console.error("Horoscope error:", error);
+
         horoscopeResult.textContent =
-            "Sorry, the horoscope could not be loaded.";
+            "Sorry, your horoscope is temporarily unavailable. Please try again later.";
+
     }
 }
-form.addEventListener("submit", function(event) {
+
+
+birthChartForm.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
@@ -70,12 +122,29 @@ form.addEventListener("submit", function(event) {
     const month = date.getMonth() + 1;
 
     const zodiacSign = getZodiacSign(day, month);
+    const selectedPeriod = horoscopePeriod.value;
 
-        result.textContent = "Your zodiac sign is " + zodiacSign + ".";
+    if (selectedPeriod === "daily") {
+        horoscopeHeading.textContent = "Today's Horoscope";
+    } else if (selectedPeriod === "weekly") {
+        horoscopeHeading.textContent = "Weekly Horoscope";
+    } else if (selectedPeriod === "monthly") {
+        horoscopeHeading.textContent = "Monthly Horoscope";
+    }
 
-    result.classList.add("show-result");
-     getHoroscope(zodiacSign);
+    // Use the visitor's name to personalise the reading
+    const userName = document.getElementById("name").value.trim();
+
+    zodiacResult.textContent =
+        userName + ", your zodiac sign is " + zodiacSign + ".";
+
+    readingResult.hidden = false;
+
+    getHoroscope(zodiacSign, selectedPeriod);
+
 });
+
+
 // jQuery click() and slideToggle() methods based on
 // W3Schools jQuery Effects (2026)
 // https://www.w3schools.com/jquery/jquery_hide_show.asp
