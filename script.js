@@ -75,8 +75,14 @@ async function getHoroscope(zodiacSign, period) {
         );
 
         if (!response.ok) {
-            throw new Error("API request failed: " + response.status);
-        }
+
+    const errorDetails = await response.text();
+
+    throw new Error(
+        "API error " + response.status + ": " + errorDetails
+    );
+
+}
 
         const data = await response.json();
 

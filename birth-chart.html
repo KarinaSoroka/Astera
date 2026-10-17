@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astera Reading - Astera</title>
+
+    <!-- Bootstrap 5 based on W3Schools Bootstrap 5 Get Started (2026)
+         https://www.w3schools.com/bootstrap5/bootstrap_get_started.php -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -21,11 +27,51 @@
 <header>
     <h1>Astera</h1>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="zodiac.html">Zodiac Signs</a>
-        <a href="birth-chart.html">Astera Reading</a>
-        <a href="about.html">About</a>
+    <!-- Responsive navigation based on W3Schools Bootstrap 5 Navbar (2026)
+         https://www.w3schools.com/bootstrap5/bootstrap_navbar.php -->
+
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
+
+        <div class="container-fluid justify-content-center">
+
+            <!-- Navigation collapses into a menu button on smaller screens -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#asteraNav"
+                    aria-controls="asteraNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="asteraNav">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="index.html">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="zodiac.html">Zodiac Signs</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="birth-chart.html" aria-current="page">Astera Reading</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="about.html">About</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
     </nav>
 </header>
 
@@ -117,6 +163,7 @@
                rel="noopener noreferrer"></a>
 
         </div>
+
     <!-- API attribution required by Sigastra.
      Source: https://sigastra.com/partners/api -->
 
@@ -141,6 +188,9 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script src="script.js"></script>
+
+<!-- Bootstrap JavaScript enables the collapsible navigation menu -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
