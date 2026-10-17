@@ -14,7 +14,7 @@ body {
 header {
     background-color: #30234f;
     color: white;
-    padding: 20px;
+    padding: 20px 10px;
     text-align: center;
 }
 
@@ -27,15 +27,15 @@ nav a {
 main {
     max-width: 900px;
     margin: auto;
-    padding: 30px;
+    padding: 15px;
 }
 
 /* Consistent light purple background across Astera sections */
 
 section {
     background-color: rgba(235, 225, 245, 0.9);
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
     border-radius: 10px;
 }
 
@@ -67,7 +67,7 @@ a:focus {
 
 .birth-chart-form {
     background-color: rgba(235, 225, 245, 0.9);
-    padding: 30px;
+    padding: 15px;
     border-radius: 12px;
 }
 
@@ -135,7 +135,7 @@ a:focus {
 
 .reading-result {
     margin-top: 25px;
-    padding: 20px;
+    padding: 15px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     border: 1px solid #d6c5e5;
@@ -170,7 +170,7 @@ a:focus {
 
 .zodiac-section {
     background-color: rgba(235, 225, 245, 0.9);
-    padding: 30px;
+    padding: 15px;
     border-radius: 12px;
 }
 
@@ -191,7 +191,7 @@ a:focus {
     background-color: #eee4f6;
     border: 1px solid #d6c5e5;
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px;
 }
 
 .zodiac-card h3 {
