@@ -5,7 +5,7 @@ body {
     background-image: url("astrology background.jpg");
     background-size: cover;
     background-position: center;
-    background-attachment: scroll;
+    background-attachment: fixed;
     line-height: 1.6;
 
     color: #2d2940;
