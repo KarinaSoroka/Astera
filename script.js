@@ -6,7 +6,7 @@ const apiCredit = document.getElementById("api-credit");
 const horoscopePeriod = document.getElementById("horoscope-period");
 const horoscopeHeading = document.getElementById("horoscope-heading");
 const readingResult = document.getElementById("reading-result");
-
+const birthplaceResult = document.getElementById("birthplace-result");
 
 // Prevent users from selecting a future birth date
 // Based on W3Schools JavaScript Date Get Methods and Input Date max Property (2026)
@@ -100,7 +100,65 @@ async function getHoroscope(zodiacSign, period) {
 
     }
 }
+// Birthplace lookup using Open-Meteo Geocoding API
+// https://open-meteo.com/en/docs/geocoding-api
 
+async function getBirthplace(place) {
+
+    birthplaceResult.textContent = "";
+    birthplaceResult.hidden = true;
+
+    // Only search when the visitor enters a birthplace
+    if (place === "") {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "https://geocoding-api.open-meteo.com/v1/search?name=" +
+            encodeURIComponent(place) +
+            "&count=1&language=en&format=json"
+        );
+
+        if (!response.ok) {
+            throw new Error("Birthplace API error: " + response.status);
+        }
+
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+
+            const location = data.results[0];
+
+            const locationName = [
+                location.name,
+                location.admin1,
+                location.country
+            ].filter(Boolean).join(", ");
+
+            birthplaceResult.textContent =
+                "Suggested birthplace: " + locationName;
+
+        } else {
+
+            birthplaceResult.textContent =
+                "Birthplace not found. Please check the spelling.";
+
+        }
+
+    } catch (error) {
+
+        console.error("Birthplace error:", error);
+
+        birthplaceResult.textContent =
+            "Unable to check your birthplace at the moment.";
+
+    }
+
+    birthplaceResult.hidden = false;
+
+}
 
 birthChartForm.addEventListener("submit", function(event) {
 
@@ -130,6 +188,11 @@ birthChartForm.addEventListener("submit", function(event) {
 
     readingResult.hidden = false;
 
+    // Look up the birthplace entered by the visitor
+    const birthplace = document.getElementById("birthplace").value.trim();
+    
+    getBirthplace(birthplace);
+    
     getHoroscope(zodiacSign, selectedPeriod);
 
 });
