@@ -44,9 +44,19 @@ footer {
     padding: 20px;
 }
 
-a:focus {
-    outline: 3px solid #ffd966;
+/* ACCESSIBILITY - KEYBOARD NAVIGATION */
+
+/* Dark focus outline for links on light backgrounds */
+
+a:focus-visible {
+    outline: 3px solid #30234f;
     outline-offset: 4px;
+}
+
+/* Yellow focus outline for links in the dark header */
+
+header a:focus-visible {
+    outline-color: #ffd966;
 }
 
 .skip-link {
