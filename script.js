@@ -76,13 +76,13 @@ async function getHoroscope(zodiacSign, period) {
 
         if (!response.ok) {
 
-    const errorDetails = await response.text();
+            const errorDetails = await response.text();
 
-    throw new Error(
-        "API error " + response.status + ": " + errorDetails
-    );
+            throw new Error(
+                "API error " + response.status + ": " + errorDetails
+            );
 
-}
+        }
 
         const data = await response.json();
 
@@ -142,6 +142,12 @@ birthChartForm.addEventListener("submit", function(event) {
 $(document).ready(function() {
 
     $("#birth-chart-info-btn").click(function() {
+
+        // Check whether the information panel is expanded
+        const isExpanded = $(this).attr("aria-expanded") === "true";
+
+        // Update the button's accessibility state
+        $(this).attr("aria-expanded", String(!isExpanded));
 
         $("#birth-chart-info").slideToggle();
 
