@@ -7,7 +7,7 @@ const horoscopePeriod = document.getElementById("horoscope-period");
 const horoscopeHeading = document.getElementById("horoscope-heading");
 const readingResult = document.getElementById("reading-result");
 const birthplaceResult = document.getElementById("birthplace-result");
-
+const birthplaceCredit = document.getElementById("birthplace-credit");
 // Prevent users from selecting a future birth date
 // Based on W3Schools JavaScript Date Get Methods and Input Date max Property (2026)
 // https://www.w3schools.com/js/js_date_methods.asp
@@ -107,6 +107,7 @@ async function getBirthplace(place) {
 
     birthplaceResult.textContent = "";
     birthplaceResult.hidden = true;
+    birthplaceCredit.hidden = true;
 
     // Only search when the visitor enters a birthplace
     if (place === "") {
@@ -139,6 +140,8 @@ async function getBirthplace(place) {
 
             birthplaceResult.textContent =
                 "Suggested birthplace: " + locationName;
+            
+            birthplaceCredit.hidden = false;
 
         } else {
 
