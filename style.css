@@ -222,6 +222,7 @@ section h2 {
     font-size: 1.5em;
     font-weight: bold;
 }
+
 /* MOBILE-FIRST RESPONSIVE DESIGN */
 
 /* Media queries based on W3Schools CSS Media Queries (2026)
@@ -264,13 +265,37 @@ section h2 {
 
 }
 
-/* Larger desktop screens */
+/* NAVIGATION STYLING */
 
-@media screen and (min-width: 992px) {
+/* Improve navigation link spacing */
 
-    body {
-        background-attachment: fixed;
-    }
-
+.navbar .nav-link {
+    margin: 0;
+    padding: 12px 16px;
+    border-radius: 6px;
 }
+
+/* Highlight navigation links when using the mouse */
+
+.navbar .nav-link:hover {
+    background-color: #594078;
+}
+
+/* Attribute selector highlights the current page */
+
+.navbar .nav-link[aria-current="page"] {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    font-weight: bold;
+}
+
+/* Highlight navigation links and menu button when using the keyboard */
+
+.navbar .nav-link:focus-visible,
+.navbar .navbar-toggler:focus-visible {
+    outline: 3px solid #ffd966;
+    outline-offset: 3px;
+}
+
+
 
